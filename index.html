@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183c31">
+  <meta name="description" content="A practical, evidence-aware DASH-friendly restaurant and dish finder for Rockville, Gaithersburg, and Bethesda, Maryland.">
+  <title>Dash & Dine — Montgomery County</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#results">Skip to results</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Dash and Dine home">
+      <span class="brand-mark" aria-hidden="true">D</span>
+      <span><strong>Dash & Dine</strong><small>Montgomery County, MD</small></span>
+    </a>
+    <nav class="header-actions" aria-label="Utilities">
+      <button class="quiet-button" id="aboutButton">How ranking works</button>
+      <button class="admin-button" id="adminButton"><span aria-hidden="true">✎</span> Edit database</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">A practical guide, not a prescription</p>
+        <h1 id="hero-title">Find a better-fit meal, <em>without the guesswork.</em></h1>
+        <p class="hero-subtitle">Compare real menu dishes around Rockville, Gaithersburg, and Bethesda. Published nutrition is separated from estimates and unknowns—always.</p>
+      </div>
+      <div class="goal-card" aria-label="Daily sodium goal">
+        <div class="goal-ring"><span>&lt;2,300</span><small>mg sodium / day</small></div>
+        <p>Use the meal filter below to decide how much of your daily sodium budget works for this meal.</p>
+      </div>
+    </section>
+
+    <section class="finder" aria-label="Restaurant and dish finder">
+      <aside class="filters" aria-label="Filters">
+        <div class="filters-heading">
+          <div>
+            <p class="step-label">Step 1</p>
+            <h2>Narrow it down</h2>
+          </div>
+          <button class="text-button" id="resetFilters">Reset</button>
+        </div>
+
+        <label class="search-field">
+          <span>Restaurant, cuisine, or dish</span>
+          <span class="input-shell"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Try “Thai” or “salmon”" autocomplete="off"></span>
+        </label>
+
+        <label class="select-field restaurant-select-field">
+          <span>Jump to a restaurant</span>
+          <select id="restaurantSelect"><option value="all">All restaurants</option></select>
+        </label>
+
+        <fieldset>
+          <legend>Location</legend>
+          <div class="chip-row" id="locationChips"></div>
+        </fieldset>
+
+        <label class="select-field">
+          <span>Cuisine</span>
+          <select id="cuisineSelect"><option value="all">All cuisines</option></select>
+        </label>
+
+        <div class="range-group">
+          <div class="range-heading"><label for="sodiumRange">Sodium per meal</label><output id="sodiumOutput" for="sodiumRange">≤ 1,000 mg</output></div>
+          <input id="sodiumRange" type="range" min="400" max="2300" step="100" value="1000">
+          <div class="range-scale"><span>400 mg</span><span>2,300 mg</span></div>
+        </div>
+
+        <div class="range-group">
+          <div class="range-heading"><label for="satFatRange">Saturated fat</label><output id="satFatOutput" for="satFatRange">&lt; 12 g</output></div>
+          <input id="satFatRange" type="range" min="2" max="16" step="1" value="12">
+          <div class="range-scale"><span>2 g</span><span>16 g</span></div>
+        </div>
+
+        <div class="range-group calorie-range-group">
+          <div class="range-heading"><label for="calorieRange">Minimum meal calories</label><output id="calorieOutput" for="calorieRange">≥ 400 kcal</output></div>
+          <input id="calorieRange" type="range" min="0" max="800" step="50" value="400">
+          <div class="range-scale"><span>No minimum</span><span>800 kcal</span></div>
+          <p class="range-help">Raise this to favor more substantial meals without relaxing your sodium or saturated-fat limits.</p>
+        </div>
+
+        <label class="toggle-row"><input id="unknownToggle" type="checkbox" checked><span class="toggle" aria-hidden="true"></span><span><strong>Include unknown nutrition*</strong><small>Shown last; calories may be unknown</small></span></label>
+        <label class="toggle-row"><input id="takeoutToggle" type="checkbox"><span class="toggle" aria-hidden="true"></span><span><strong>Takeout-friendly only</strong><small>Fast casual, pickup, or delivery</small></span></label>
+
+        <div class="filter-note"><span aria-hidden="true">i</span><p>A dish below the meal filters is not a guarantee that your whole day meets DASH goals. Portions and preparation vary.</p></div>
+      </aside>
+
+      <section class="results" id="results" tabindex="-1">
+        <div class="results-toolbar">
+          <div>
+            <p class="step-label">Step 2</p>
+            <h2>Choose a restaurant</h2>
+            <p id="resultSummary" class="result-summary" aria-live="polite"></p>
+          </div>
+          <label class="sort-field">Sort
+            <select id="sortSelect">
+              <option value="best">Best fit</option>
+              <option value="sodium">Lowest known sodium</option>
+              <option value="calories">Most substantial</option>
+              <option value="name">Restaurant A–Z</option>
+              <option value="recent">Recently verified</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="restaurant-strip" id="restaurantStrip" role="list" aria-label="Restaurants"></div>
+
+        <div class="dish-heading">
+          <div><p class="step-label">Step 3</p><h2 id="dishHeading">Best-fit dishes</h2></div>
+          <div class="legend"><span><i class="dot official"></i>Published</span><span><i class="dot calculated"></i>Official components</span><span><i class="dot unknown"></i>Unknown*</span></div>
+        </div>
+        <div class="dish-grid" id="dishGrid"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <div id="emptyIcon" aria-hidden="true">⌕</div>
+          <h3 id="emptyTitle">No matches at these limits</h3>
+          <p id="emptyCopy">Try lowering the calorie minimum, raising the sodium limit, including unknown nutrition, or clearing the restaurant selection.</p>
+          <p class="empty-meta" id="emptyMeta" hidden></p>
+          <p><a class="quiet-button empty-source" id="emptySource" href="#" target="_blank" rel="noopener" hidden>Open county source ↗</a></p>
+          <button class="primary-button" id="emptyReset">Reset filters</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="evidence-banner">
+      <div><span class="asterisk">*</span></div>
+      <div><h2>What the asterisk means</h2><p>The restaurant publishes the dish on its menu, but we did not find the complete nutrition facts needed here—especially sodium and saturated fat. Calories appear only when the restaurant publishes them. These dishes are <strong>ideas to investigate, not verified DASH-friendly choices</strong>. Ask the restaurant about preparation and portions.</p></div>
+      <button class="quiet-button light" id="sourcesButton">View data notes</button>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Dash & Dine</strong> is a locally stored planning aid. It is not medical advice and does not claim exhaustive restaurant coverage.</p>
+    <p>Starter data reviewed <span id="datasetDate"></span> · <button class="link-button" id="footerAdmin">Manage data</button></p>
+  </footer>
+
+  <dialog id="detailDialog" class="detail-dialog"></dialog>
+
+  <dialog id="aboutDialog" class="info-dialog">
+    <form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form>
+    <p class="eyebrow">Transparent by design</p>
+    <h2>How best-fit ranking works</h2>
+    <ol>
+      <li><strong>Evidence first.</strong> Dishes with restaurant-published nutrition rank above menu-only candidates.</li>
+      <li><strong>Your limits next.</strong> Known sodium, saturated fat, and meal calories are compared with the filters you choose.</li>
+      <li><strong>Substantial, not merely large.</strong> Meals meeting your calorie minimum get a modest boost, while sodium and saturated-fat ceilings still apply.</li>
+      <li><strong>Practical signals.</strong> Vegetable-forward dishes and useful modifications receive a modest boost.</li>
+    </ol>
+    <p>Component-based totals (for customizable meals) are marked separately because real scoops and substitutions vary. Unknown values never become zero and never receive a “verified fit” label.</p>
+  </dialog>
+
+  <dialog id="sourcesDialog" class="info-dialog">
+    <form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form>
+    <p class="eyebrow">Data notes</p>
+    <h2>What is—and is not—verified</h2>
+    <div class="source-note-list">
+      <p><span class="confidence-pill official">Published</span> Values copied from an official restaurant nutrition guide for the named serving.</p>
+      <p><span class="confidence-pill calculated">Official components</span> Total calculated from official ingredient values. Displayed with “≈” because serving scoops vary.</p>
+      <p><span class="confidence-pill estimate">Estimate</span> User-entered estimate. Never treated as official.</p>
+      <p><span class="confidence-pill unknown">Unknown*</span> Menu item is supported by an official menu page, but full nutrition was not found.</p>
+      <p><span class="confidence-pill catalog">Discovery only</span> The location is supported by either matched Montgomery County restaurant/inspection records or a current official area dining directory. Its menu has not yet been reviewed, so it has no DASH ranking.</p>
+      <p><span class="confidence-pill official">Shared chain menu</span> Official U.S. chain nutrition is linked to matching local locations. Availability must still be confirmed with that location.</p>
+    </div>
+    <p>The discovery catalog uses county records through October 23, 2026. A recent inspection record supports the location’s existence, but does not guarantee that it is currently open. Menus change; confirm availability before ordering.</p>
+  </dialog>
+
+  <dialog id="adminDialog" class="admin-dialog">
+    <form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form>
+    <div class="admin-header"><div><p class="eyebrow">Stored on this browser</p><h2>Edit your database</h2><p>Changes persist locally. Export a backup before major edits.</p></div><span id="storageStatus" class="storage-status">Saved locally</span></div>
+    <div class="admin-tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="dishes">Dishes</button>
+      <button role="tab" aria-selected="false" data-tab="restaurants">Restaurants</button>
+      <button role="tab" aria-selected="false" data-tab="backup">Backup & restore</button>
+    </div>
+    <section class="admin-panel active" data-panel="dishes">
+      <div class="admin-panel-heading"><h3>Dish records</h3><button class="primary-button small" id="addDishButton">+ Add dish</button></div>
+      <div id="adminDishList" class="admin-list"></div>
+    </section>
+    <section class="admin-panel" data-panel="restaurants">
+      <div class="admin-panel-heading"><h3>Restaurant records</h3><button class="primary-button small" id="addRestaurantButton">+ Add restaurant</button></div>
+      <div id="adminRestaurantList" class="admin-list"></div>
+    </section>
+    <section class="admin-panel backup-panel" data-panel="backup">
+      <h3>Portable local data</h3>
+      <p>Export includes every restaurant and dish, including your edits. Import replaces the current local database after validation.</p>
+      <div class="backup-actions"><button class="primary-button" id="exportButton">Export JSON</button><label class="quiet-button file-button">Import JSON<input id="importInput" type="file" accept="application/json"></label><button class="danger-button" id="restoreButton">Restore starter data</button></div>
+      <p class="small-print">Tip: save the exported JSON alongside the project if you plan to deploy your custom data later.</p>
+    </section>
+  </dialog>
+
+  <dialog id="formDialog" class="form-dialog">
+    <form id="recordForm">
+      <button type="button" class="dialog-close" id="formClose" aria-label="Close">×</button>
+      <p class="eyebrow" id="formEyebrow">Dish record</p>
+      <h2 id="formTitle">Add dish</h2>
+      <div id="formFields" class="form-fields"></div>
+      <div class="form-actions"><button type="button" class="quiet-button" id="formCancel">Cancel</button><button type="submit" class="primary-button">Save record</button></div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="catalog.js"></script>
+  <script src="menu-data.js"></script>
+  <script src="area-data.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
