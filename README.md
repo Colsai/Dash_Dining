@@ -11,9 +11,11 @@ The starter database is deliberately evidence-aware:
 - `Directory only` means a current official area or restaurant directory listed the location when reviewed, but its menu and nutrition have not yet been reviewed. These locations also receive no dish or DASH ranking.
 - User-entered estimates remain visibly labeled `Estimate`.
 
-The starter database contains **801 restaurant/location records** and **257 reviewed dish records** as of November 8, 2026. It is broad but not guaranteed exhaustive and is not medical advice. Menus, ownership, and preparation change.
+The starter database contains **881 restaurant/location records** and **257 reviewed dish records** as of November 8, 2026. It is broad but not guaranteed exhaustive and is not medical advice. Menus, ownership, and preparation change.
 
 The November directory expansion added **68 previously uncovered restaurant locations**: 34 in Bethesda, 25 in Rockville, and 9 in Gaithersburg. These records were compared against the existing catalog by normalized name and address before being added. Two apparent duplicates—Maki Miki/Maki Maki Sushi and Uncle Julio's Rio Grande Cafe/Rio Grande Café—were intentionally not added a second time.
+
+A second deep-coverage pass added **80 more current directory-listed locations**: 53 in Rockville, 14 in North Bethesda/Pike & Rose, and 13 in Gaithersburg/Kentlands/RIO. That brings the official-directory layer to **148 locations**. The pass used the City of Rockville's 2026 Global Bites directory plus the current Pike & Rose, Kentlands Market Square, and RIO dining directories. Three ambiguous same-address/name overlaps—Sweet Bakery, Tacos Tres Amigos, and Nosh Grill House—were conservatively excluded rather than risk duplicate records.
 
 The dish layer includes **203 location-linked records** generated from current official U.S. menu or nutrition evidence for **75 locations** across Subway, Starbucks, Dunkin', Five Guys, Chick-fil-A, First Watch, Wendy's, Panera, sweetgreen, CAVA, Honeygrow, QDOBA, Potbelly, and California Tortilla. Shared chain evidence is explicitly labeled and always requires confirmation that the item is available at the selected local restaurant.
 

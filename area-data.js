@@ -103,5 +103,103 @@
     ["gaithersburg-ruths-chris", "Ruth's Chris Steak House", "Steakhouse", "Gaithersburg", "106 Crown Park Ave, Gaithersburg, MD 20878", "https://www.ruthschris.com/happy-hour/md/gaithersburg-restaurant/7353"]
   ];
 
-  window.AREA_RESTAURANTS = [...bethesda, ...rockville, ...gaithersburg].map(makeRestaurant);
+  const rockvilleDeepCoverage = [
+    ["rockville-asia-taste", "Asia Taste Jumbo Jumbo Café", "Asian", "Rockville", "15192 Frederick Rd, Rockville, MD 20850", rockvilleDirectory, "https://www.jumbojumbocafe.com/locations-menus-1"],
+    ["rockville-ayse-meze", "Ayse Meze Lounge", "Mediterranean", "Rockville", "700 King Farm Blvd, Suite 170, Rockville, MD 20850", rockvilleDirectory, "https://aysemeze.com/"],
+    ["rockville-azu", "AZU Peruvian Cuisine", "Peruvian", "Rockville", "611 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory, "https://azuperuviancuisine.com/"],
+    ["rockville-big-papis", "Big Papi's Tacos", "Mexican", "Rockville", "201 E Middle Ln, Rockville, MD 20850", rockvilleDirectory, "https://bigpapistacos.com/bigpapisrockville"],
+    ["rockville-bon-fresco", "bon fresco", "Sandwiches & café", "Rockville", "534 Gaither Rd, Rockville, MD 20850", rockvilleDirectory, "http://bonfresco.com/"],
+    ["rockville-bread-corner", "Bread Corner", "Bakery & café", "Rockville", "591 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory, "http://www.bread-corner.com/"],
+    ["rockville-camerons", "Cameron's Seafood", "Seafood", "Rockville", "875 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory, "https://www.cameronsseafood.com/"],
+    ["rockville-carvings", "Carvings Deli Cafe", "Deli", "Rockville", "702 King Farm Blvd, Rockville, MD 20850", rockvilleDirectory],
+    ["rockville-chateau", "Chateau de Rockville", "French café", "Rockville", "1701 Rockville Pike, Rockville, MD 20852", rockvilleDirectory],
+    ["rockville-east-pearl", "East Pearl Restaurant", "Chinese", "Rockville", "838 Rockville Pike, Suite B, Rockville, MD 20852", rockvilleDirectory, "http://www.eastpearlrestaurant.com/"],
+    ["rockville-el-maguey", "El Maguey Restaurant", "Mexican", "Rockville", "1203 Taft St, Rockville, MD 20850", rockvilleDirectory],
+    ["rockville-el-mercat", "El Mercat Bar de Tapas", "Spanish", "Rockville", "101 Gibbs St, Rockville, MD 20850", rockvilleDirectory, "https://www.elmercatbardetapas.com/"],
+    ["rockville-ethiopis", "Ethiopis", "Ethiopian", "Rockville", "825 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory, "https://www.ethiopismenu.com/"],
+    ["rockville-express-gourmet", "Express Gourmet", "Deli & café", "Rockville", "1801 Research Blvd, Lower Level 1, Rockville, MD 20850", rockvilleDirectory],
+    ["rockville-filipino-market", "Filipino Market & Cafe", "Filipino", "Rockville", "759 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory],
+    ["rockville-finnegans", "Finnegan's Wake Irish Pub", "Irish pub", "Rockville", "100 Gibbs St, Rockville, MD 20850", rockvilleDirectory, "http://www.finneganswakerockville.com/"],
+    ["rockville-gyuzo", "Gyuzo Japanese BBQ", "Japanese barbecue", "Rockville", "33 Maryland Ave, Unit B, Rockville, MD 20850", rockvilleDirectory, "http://gyuzobbq.com/"],
+    ["rockville-hot-pot-kitchen", "Hot Pot Kitchen", "Chinese hot pot", "Rockville", "595 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory, "https://www.hotpotkitchen.us/"],
+    ["rockville-hulu-hotpot", "Hulu Hotpot & BBQ", "Chinese hot pot", "Rockville", "1488 Rockville Pike, Suite B, Rockville, MD 20852", rockvilleDirectory, "https://www.huluskewer.com/"],
+    ["rockville-js-asian", "J's Asian Street Food", "Asian", "Rockville", "605 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory, "https://www.jsasianfood.com/"],
+    ["rockville-joshs-smash", "Josh's Smash Shack", "Burgers", "Rockville", "330 N Washington St, Rockville, MD 20850", rockvilleDirectory, "https://joshssmackshack.peblla.com/"],
+    ["rockville-k-bap", "K Bap House", "Korean", "Rockville", "121 Congressional Ln, Rockville, MD 20852", rockvilleDirectory],
+    ["rockville-kielbasa", "Kielbasa Factory", "Polish deli", "Rockville", "1073 Rockville Pike, Rockville, MD 20852", rockvilleDirectory, "http://www.kielbasafactory.com/"],
+    ["rockville-lebanese-taverna", "Lebanese Taverna Cafe", "Lebanese", "Rockville", "115 Gibbs St, Rockville, MD 20850", rockvilleDirectory, "https://www.lebanesetaverna.com/"],
+    ["rockville-lebtav", "LebTav", "Lebanese", "Rockville", "1605 Rockville Pike, Rockville, MD 20852", rockvilleDirectory, "https://www.lebanesetaverna.com/leb-tav"],
+    ["rockville-les-delices", "Les Délices Bakery", "Bakery", "Rockville", "1601 E Gude Dr, Rockville, MD 20850", rockvilleDirectory, "https://www.lesdelicesbakery.com/"],
+    ["rockville-little-miner", "Little Miner Taco", "Mexican", "Rockville", "39 Maryland Ave, Unit A, Rockville, MD 20850", rockvilleDirectory, "https://www.littleminertaco.com/"],
+    ["rockville-mandala", "Mandala Kitchen", "Nepalese & Indian", "Rockville", "199 E Montgomery Ave, Suite E, Rockville, MD 20850", rockvilleDirectory],
+    ["rockville-marquez", "Marquez Pupuseria & Taqueria", "Salvadoran & Mexican", "Rockville", "890 Rockville Pike, Rockville, MD 20852", rockvilleDirectory, "http://ordermarquezpupuseriaandtaqueria.com/"],
+    ["rockville-mings", "Ming's Chinese Restaurant", "Chinese", "Rockville", "800 Pleasant Dr, Suite 120, Rockville, MD 20850", rockvilleDirectory, "https://mingsrockville.com/"],
+    ["rockville-mykonos", "Mykonos Grill", "Greek", "Rockville", "121 Congressional Ln, Rockville, MD 20852", rockvilleDirectory, "http://www.mykonosgrill.com/"],
+    ["rockville-neighbors", "Neighbors Coffee", "Coffee & café", "Rockville", "1101 Nelson St, Rockville, MD 20850", rockvilleDirectory, "https://neighborscoffee.shop/"],
+    ["rockville-petit-delice", "Petit Délice", "French bakery", "Rockville", "90 W Montgomery Ave, Rockville, MD 20850", rockvilleDirectory, "https://www.petitdeliceusa.com/"],
+    ["rockville-pizza-monkey", "Pizza Monkey", "Pizza", "Rockville", "330 N Washington St, Rockville, MD 20850", rockvilleDirectory, "https://thepizzamonkey.com/"],
+    ["rockville-plaza-oaxaca", "Plaza Oaxaca", "Mexican", "Rockville", "141 Gibbs St, Suite 305, Rockville, MD 20850", rockvilleDirectory, "https://www.plazaoaxacamd.com/"],
+    ["rockville-richs", "Rich's Café", "Café", "Rockville", "1 Church St, Rockville, MD 20850", rockvilleDirectory],
+    ["rockville-royal-durbar", "Royal Durbar Nepalese Cuisine", "Nepalese", "Rockville", "1321 Rockville Pike, Rockville, MD 20852", rockvilleDirectory, "https://royaldurbarkitchen.site/"],
+    ["rockville-sandwiches-such", "Sandwiches & Such", "Sandwiches", "Rockville", "15215 Shady Grove Rd, Suite 1, Rockville, MD 20850", rockvilleDirectory],
+    ["rockville-seoul-kitchen", "Seoul Kitchen", "Korean", "Rockville", "4 N Washington St, Rockville, MD 20850", rockvilleDirectory, "https://seoul-kitchen.com/"],
+    ["rockville-shimiaodao", "Shimiaodao Yunnan Rice Noodle", "Chinese noodles", "Rockville", "819 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory, "https://shimiaodaoyunanricenoodle.site/"],
+    ["rockville-sichuan-jin-river", "Sichuan Jin River", "Chinese", "Rockville", "410 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory, "http://www.sichuanjinrivermd.com/"],
+    ["rockville-taipei-cafe", "Taipei Cafe", "Taiwanese", "Rockville", "802 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory],
+    ["rockville-taqueria-xintli", "Taqueria Xintli", "Mexican", "Rockville", "2131 Veirs Mill Rd, Rockville, MD 20851", rockvilleDirectory],
+    ["rockville-terra-gaucha", "Terra Gaucha Brazilian Steakhouse", "Brazilian steakhouse", "Rockville", "1651 Chapman Ave, Rockville, MD 20852", rockvilleDirectory, "https://terragaucha.com/"],
+    ["rockville-thai-chef", "Thai Chef", "Thai", "Rockville", "29 Maryland Ave, Suite 308, Rockville, MD 20850", rockvilleDirectory, "http://www.thaichefdmv.com/"],
+    ["rockville-churrasco", "The Churrasco Brazilian BBQ", "Brazilian", "Rockville", "303 N Washington St, Rockville, MD 20850", rockvilleDirectory, "https://thechurrasco.com/"],
+    ["rockville-thai-cuisine", "The Thai Cuisine Restaurant", "Thai", "Rockville", "757 Hungerford Dr, Rockville, MD 20850", rockvilleDirectory, "http://www.thethaicuisinerockville.com/"],
+    ["rockville-treat-street", "Treat Street", "Desserts & café", "Rockville", "5 Dawson Ave, Rockville, MD 20850", rockvilleDirectory, "https://treatstreet.peblla.com/"],
+    ["rockville-twinbrook-deli", "Twinbrook Deli", "Deli", "Rockville", "2208 Veirs Mill Rd, Rockville, MD 20851", rockvilleDirectory, "http://www.twinbrookdeli.com/"],
+    ["rockville-urban-cafe", "Urban Cafe & Expresso", "Café", "Rockville", "1445 Research Blvd, Rockville, MD 20850", rockvilleDirectory],
+    ["rockville-uzu", "Uzu Revolving Sushi", "Japanese & sushi", "Rockville", "1701 Rockville Pike, Suite A6, Rockville, MD 20852", rockvilleDirectory, "https://www.uzu-sushi.us/"],
+    ["rockville-xo-modern-pho", "XO Modern Pho & Grill", "Vietnamese", "Rockville", "313 N Washington St, Rockville, MD 20850", rockvilleDirectory],
+    ["rockville-yummy-bowl", "Yummy Bowl", "Asian bowls", "Rockville", "2010 Veirs Mill Rd, Rockville, MD 20851", rockvilleDirectory, "https://www.eatyummybowlmd.com/order"]
+  ];
+
+  const pikeAndRoseDirectory = "https://pikeandrose.com/dine/";
+  const northBethesdaDeepCoverage = [
+    ["north-bethesda-bartaco", "bartaco Pike & Rose", "Tacos", "North Bethesda", "950 Rose Ave, North Bethesda, MD 20852", pikeAndRoseDirectory, "https://bartaco.com/location/pike-rose/"],
+    ["north-bethesda-bouboulina", "Bouboulina", "Greek & Mediterranean", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory],
+    ["north-bethesda-call-your-mother", "Call Your Mother Deli Pike & Rose", "Deli & bagels", "North Bethesda", "11807 Grand Park Ave, North Bethesda, MD 20852", pikeAndRoseDirectory, "https://www.callyourmotherdeli.com/order"],
+    ["north-bethesda-carusos", "Caruso's Grocery Pike & Rose", "Italian", "North Bethesda", "11820 Trade St, North Bethesda, MD 20852", pikeAndRoseDirectory, "https://www.carusosgrocery.com/pikeandrose"],
+    ["north-bethesda-chard", "CHAR'D", "Mediterranean", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory],
+    ["north-bethesda-city-perch", "City Perch", "American", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory],
+    ["north-bethesda-falafel-inc", "Falafel Inc. Pike & Rose", "Mediterranean", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory],
+    ["north-bethesda-jinya", "JINYA Ramen Bar Pike & Rose", "Japanese ramen", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory],
+    ["north-bethesda-mui", "MUI Supper Club", "Japanese", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory],
+    ["north-bethesda-nandos", "Nando's PERi-PERi Pike & Rose", "South African chicken", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory],
+    ["north-bethesda-pinstripes", "Pinstripes Pike & Rose", "American & Italian", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory],
+    ["north-bethesda-south-block", "South Block Pike & Rose", "Smoothies & bowls", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory],
+    ["north-bethesda-sports-social", "Sports & Social Pike & Rose", "American", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory],
+    ["north-bethesda-baked-bear", "The Baked Bear Pike & Rose", "Desserts", "North Bethesda", "Pike & Rose, North Bethesda, MD 20852", pikeAndRoseDirectory]
+  ];
+
+  const kentlandsDirectory = "https://www.kentlandsmarketsquare.com/stores/dine";
+  const gaithersburgDeepCoverage = [
+    ["gaithersburg-andys-kentlands", "Andy's Pizza Kentlands", "Pizza", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-arepa-king", "Arepa King", "Venezuelan", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-berries-bowls", "Berries & Bowls Kentlands", "Bowls & smoothies", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-brews-barrels", "Brews and Barrels", "American", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-ginas-cucina", "Gina's Cucina Siciliana", "Italian", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-kenaki", "Kenaki Sushi Counter", "Japanese & sushi", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-neals-bagels", "Neal's Bagels", "Bagels & breakfast", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-ranken", "Ranken Noodle House", "Japanese noodles", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-tandoori-nights", "Tandoori Nights", "Indian", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-vasilis", "Vasilis Kitchen Fresh Mediterranean", "Mediterranean", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-vine-alley", "Vine Alley", "Wine bar & small plates", "Gaithersburg", "Kentlands Market Square, Gaithersburg, MD 20878", kentlandsDirectory],
+    ["gaithersburg-kareems", "Kareem's Lebanese Kitchen", "Lebanese", "Gaithersburg", "212 Boardwalk Pl, Gaithersburg, MD 20878", "https://www.riolakefront.com/directory/"],
+    ["gaithersburg-koi-sushi", "Koi Sushi Rio Lakefront", "Japanese & sushi", "Gaithersburg", "203 Boardwalk Pl, Gaithersburg, MD 20878", "https://www.riolakefront.com/directory/"]
+  ];
+
+  window.AREA_RESTAURANTS = [
+    ...bethesda,
+    ...rockville,
+    ...gaithersburg,
+    ...rockvilleDeepCoverage,
+    ...northBethesdaDeepCoverage,
+    ...gaithersburgDeepCoverage
+  ].map(makeRestaurant);
 })();

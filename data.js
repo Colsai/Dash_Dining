@@ -1,9 +1,9 @@
 window.STARTER_DATA = {
   meta: {
-    version: 7,
+    version: 8,
     title: "Dash & Dine starter database",
     reviewed: "2026-11-08",
-    note: "Curated dish evidence plus a broad county-sourced restaurant discovery catalog and current official area-directory additions. Shared chain-menu records require local availability confirmation. Fast-casual coverage includes Honeygrow, QDOBA, Potbelly, California Tortilla, and CAVA. A minimum-calorie filter supports substantial-meal searches. Coverage is extensive, not guaranteed exhaustive."
+    note: "Curated dish evidence plus a broad county-sourced restaurant discovery catalog and two current official area-directory coverage passes. Shared chain-menu records require local availability confirmation. Fast-casual coverage includes Honeygrow, QDOBA, Potbelly, California Tortilla, and CAVA. A minimum-calorie filter supports substantial-meal searches. Coverage is extensive, not guaranteed exhaustive."
   },
   restaurants: [
     {id:"chipotle",name:"Chipotle",cuisine:"Mexican-inspired",cities:["Rockville","Gaithersburg","Bethesda"],service:["Fast casual","Takeout","Delivery"],address:"Multiple local locations",sourceUrl:"https://locations.chipotle.com/md",menuUrl:"https://www.chipotle.com/nutrition-calculator",verified:"2026-10-26"},
